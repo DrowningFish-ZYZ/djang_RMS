@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="container">
+        {#  操作列表  #}
+        <div style="margin-bottom: 10px">
+            <a class="btn btn-success" href="{% url 'user_add' %}">
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                新建用户
+            </a>
+
+            <a class="btn btn-info" href="{% url 'user_excel' %}">
+                <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+                数据导出
+            </a>
+        </div>
+
+        {# 数据列表 #}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                用户列表
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>姓名</th>
+                    <th>密码</th>
+                    <th>年龄</th>
+                    <th>余额</th>
+                    <th>入职时间</th>
+                    <th>性别</th>
+                    <th>所属部门</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr>
+                        <th>{{ user.id }}</th>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.password }}</td>
+                        <td>{{ user.age }}</td>
+                        <td>{{ user.account }}</td>
+                        <td>{{ user.create_time|date:'Y-m-d' }}</td>
+                        <td>{{ user.get_gender_display }}</td>
+                        <td>{{ user.depart.title }}</td>
+                        <td>
+                            <a class="btn btn-primary btn-xs" href="{% url 'user_update' %}?pk={{ user.id }}">编辑</a>
+                            <a class="btn btn-danger btn-xs" href="{% url 'user_delete' %}?pk={{ user.id }}">删除</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        {{ pagination }}
+    </div>
+{% endblock %}

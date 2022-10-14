@@ -1,0 +1,150 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">折线图</div>
+            <div class="panel-body">
+                <div id="line" style="width: 100%; height: 300px"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">柱状图</div>
+                    <div class="panel-body">
+                        <div id="bar" style="width: 100%; height: 300px"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">饼图</div>
+                    <div class="panel-body">
+                        <div id="pie" style="width: 100%; height: 300px"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'js/echarts.min.js' %}"></script>
+    <script>
+        $(function () {
+            initBar()
+            initPie()
+            initLine()
+        })
+
+        function initBar() {
+            // 基于准备好的dom，初始化echarts实例
+            let myChart = echarts.init(document.getElementById('bar'));
+            // 指定图表的配置项和数据
+            let option = {
+                title: {text: '', left: 'center'},
+                tooltip: {},
+                legend: {data: [], bottom: 0},
+                xAxis: {data: []},
+                yAxis: {},
+                series: []
+            };
+
+            $.ajax({
+                url: '{% url "chart_user_bar" %}',
+                type: 'get',
+                dataType: 'JSON',
+                success: function (res) {
+                    // 将获取到的数据更新到 option 中
+                    option.title.text = res.data.title
+                    option.legend.data = res.data.legend
+                    option.xAxis = res.data.xAxis
+                    option.series = res.data.series
+                    // 使用刚指定的配置项和数据显示图表。
+                    myChart.setOption(option);
+                }
+            })
+        }
+
+        function initPie() {
+            let myChart = echarts.init(document.getElementById('pie'));
+            let option = {
+                title: {
+                    text: '用户性别统计',
+                    left: 'center'
+                },
+                tooltip: {
+                    trigger: 'item'
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'left'
+                },
+                series: [
+                    {
+                        name: '性别占比',
+                        type: 'pie',
+                        radius: '50%',
+                        data: [],
+                        emphasis: {
+                            itemStyle: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+            };
+
+            $.ajax({
+                url: '{% url "chart_user_pie" %}',
+                type: 'get',
+                dataType: 'JSON',
+                success: function (res) {
+                    option.series[0].data = res.data
+                    myChart.setOption(option);
+                }
+            })
+        }
+
+        function initLine() {
+            let myChart = echarts.init(document.getElementById('line'));
+            let option = {
+                title: {
+                    text: '每年入职员工人数',
+                    left: 'center'
+                },
+                xAxis: {
+                    type: 'category',
+                    data: []
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [
+                    {
+                        data: [],
+                        type: 'line'
+                    }
+                ]
+            };
+
+            $.ajax({
+                url: '{% url "chart_user_line" %}',
+                type: 'get',
+                dataType: 'JSON',
+                success: function (res){
+                    option.xAxis.data = res.xAxis
+                    option.series[0].data = res.data
+                    myChart.setOption(option);
+                }
+            })
+        }
+
+    </script>
+{% endblock %}
+

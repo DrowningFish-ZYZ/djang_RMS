@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="container">
+        {#  操作列表  #}
+        <div style="margin-bottom: 10px">
+            <a class="btn btn-success" href="{% url 'pretty_add' %}">
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                新建号码
+            </a>
+
+            <div style="float: right; width: 300px">
+                <form method="get">
+                    <div class="input-group">
+                        <input type="text" name="q" class="form-control" placeholder="手机号码">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"
+                                                                                aria-hidden="true"></span></button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        {# 数据列表 #}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                号码列表
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>号码</th>
+                    <th>价格</th>
+                    <th>级别</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for pretty in prettys %}
+                    <tr>
+                        <th>{{ pretty.id }}</th>
+                        <td>{{ pretty.mobile }}</td>
+                        <td>{{ pretty.price }}</td>
+                        <td>{{ pretty.get_level_display }}</td>
+                        <td>{{ pretty.get_status_display }}</td>
+                        <td>
+                            <a class="btn btn-primary btn-xs" href="{% url 'pretty_update' %}?pk={{ pretty.id }}">编辑</a>
+                            <a class="btn btn-danger btn-xs" href="{% url 'pretty_delete' %}?pk={{ pretty.id }}">删除</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        {#  分页  #}
+        {{ pagination }}
+    </div>
+{% endblock %}
