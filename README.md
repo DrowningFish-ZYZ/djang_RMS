@@ -15,4 +15,4 @@
 <!-- ![Image text](https://github.com/DrowningFish-ZYZ/djang_RMS/tree/main/showimg/1.jpg) -->
 <!-- ![Image text](https://github.com/DrowningFish-ZYZ/djang_RMS/tree/main/showimg/2.jpg) -->
 <!-- ![Image text](https://github.com/DrowningFish-ZYZ/djang_RMS/tree/main/showimg/3.jpg) -->
-![Image text](https://raw.githubusercontent.com/DrowningFish-ZYZ/djang_RMS/main/showimg/1.jpg)
+![Image text](https://github.com/DrowningFish-ZYZ/djang_RMS/blob/main/showimg/1.jpg)
