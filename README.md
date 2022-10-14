@@ -12,7 +12,6 @@
 - 自定义的分页组件
 
 ## 3.大体界面
-<!-- ![Image text](https://github.com/DrowningFish-ZYZ/djang_RMS/tree/main/showimg/1.jpg) -->
-<!-- ![Image text](https://github.com/DrowningFish-ZYZ/djang_RMS/tree/main/showimg/2.jpg) -->
-<!-- ![Image text](https://github.com/DrowningFish-ZYZ/djang_RMS/tree/main/showimg/3.jpg) -->
 ![Image text](https://github.com/DrowningFish-ZYZ/djang_RMS/blob/main/showimg/1.jpg)
+![Image text](https://github.com/DrowningFish-ZYZ/djang_RMS/blob/main/showimg/2.jpg)
+![Image text](https://github.com/DrowningFish-ZYZ/djang_RMS/blob/main/showimg/3.jpg)
