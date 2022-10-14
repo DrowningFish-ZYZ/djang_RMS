@@ -12,4 +12,6 @@
 - 自定义的分页组件
 
 ## 3.大体界面
-![Image text](imgshow/shouye.png)
+![Image text](imgshow/1.jpg)
+![Image text](imgshow/2.jpg)
+![Image text](imgshow/3.jpg)
